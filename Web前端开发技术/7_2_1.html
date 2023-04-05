@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>选择器演示</title>
+        <style type="text/css">
+            a {
+                color: red;
+            }
+            a:visited {
+                color: yellow;
+            }
+            a:link {
+                color: orange;
+            }
+            a:hover{
+                color: blue;
+            }
+            a:active {
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <p>链接的不同状态</p>
+        <a href="http://www.baidu.com">百度</a>
+    </body>
+</html>
+<!--
+默认状态（未访问链接）：a:link 选择器用于设置链接的默认状态，即链接未被访问过的状态。
+
+访问过的状态：a:visited 选择器用于设置链接访问后的状态。
+
+鼠标悬停状态：a:hover 选择器用于设置鼠标悬停在链接上的状态。
+
+激活状态（被点击但未释放鼠标）：a:active 选择器用于设置链接被点击后但鼠标未释放的状态。-->
