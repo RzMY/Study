@@ -5,13 +5,14 @@
         <meta charset="UTF-8">
         <style type="text/css">
             .logo{
-                width:25%;
+                width:160px;
+                float: left;
             }
             .nav{
-                width:75%;
+                width:980px;
+                float: left;
             }
             .logo,.nav{
-                float: left;
                 height: 45px;
             }
             .nav ul{
@@ -33,15 +34,20 @@
                 background-color: blue;
                 color: white;
             }
-            h2{
-                height: 65px;
-                line-height: 65px;
+            .h{
+                clear: both;
+                height: 155px;
+                position: absolute;
+                top: 45px;
+                display: flex;
+                align-items: center;
+                padding-left: 45px;
             }
         </style>
     </head>
     <body>
         <div class="logo">
-            <img src="image-0.png" alt="logo" width="160px" height="45px">
+            <img src="image-0.png" alt="logo" height="100%">
         </div>
         <div class="nav">
             <ul>
@@ -55,7 +61,7 @@
                 <li><a href="#">新闻动态</a></li>
             </ul>
         </div>
-        <div class="h2">
+        <div class="h">
             <h2>关于产品</h2>
         </div>
     </body>
