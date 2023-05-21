@@ -19,6 +19,9 @@
                 background-color: #ffffff;
             }
             .left{
+                background-image: url("bg_3.png");
+                background-size: auto 50px;
+                background-repeat: repeat-x;
                 width: 220px;
                 height: 300px;
                 float: left;
@@ -29,6 +32,9 @@
                 padding: 0 20px;
             }
             .right_top{
+                background-image: url("bg_3.png");
+                background-size: auto 50px;
+                background-repeat: repeat-x;
                 width: 700px;
                 height: 120px;
                 float: right;
@@ -38,13 +44,17 @@
                 box-shadow: 0 2px 5px rgb(0,0,0,0.5);
             }
             .right_down{
-                width: 700px;
-                height: 300px;
+                background-image: url("bg_3.png");
+                background-size: auto 50px;
+                background-repeat: repeat-x;
+                width: 680px;
+                height: 320px;
                 float: right;
                 background-color: #ffffff;
                 margin-top: 30px;
                 border-radius: 10px;
                 box-shadow: 0 2px 5px rgb(0,0,0,0.5);
+                padding: 0 0 0 20px;
             }
             ul{
                 margin: 0px;
@@ -61,14 +71,15 @@
                 padding-right: 10px;
             }
             ul li a{
-                color: #ffffff;
+                text-align: center;
+                color: #f31dd7;
                 width: 175px;
                 margin: 0px;
                 padding: 0px 0px 0px 8px;
                 text-decoration: none;
                 display: block;
                 line-height: 30px;
-                background: #808080;
+                background: #d1d1d1;
                 border-right: 1px solid #ccc;
                 border-bottom: 1px solid #ccc;
             }
@@ -76,12 +87,12 @@
                 height: 30px;
             }
             ul li ul li a{
-                background: #666;
+                background: #b3b3b3;
                 line-height: 30px;
             }
             ul li a:hover{
-                background: #666;
-                border-bottom: 1px solid #FF0000;
+                background: #747474;
+                border-bottom: 1px solid #000000;
             }
             ul li ul{
                 visibility: hidden;
@@ -90,11 +101,14 @@
                 visibility: visible;
             }
             ul li ul li a:hover{
-                background: #333;
+                background: #666;
             }
             .left p{
                 line-height: 10px;
-                color: rgb(202, 82, 160);
+                color: #f31dd7;
+            }
+            a:before{
+                color: #f31dd7;
             }
         </style>
     </head>
@@ -143,10 +157,14 @@
                 <div class="right_top">
                     <img src="bg_1.png" style="float: left;margin:10px;height:100px">
                     <p>展示以CSS技术为基础，并提供超强的视觉冲击力。只要选择列表中任意一个样式表，就可以将它加载到本页面中，并呈现不同的设计效果。</p>
-                    <p>下载<a href="#">HTML文档</a>和<a href="#">CSS文件</a>。</p>
+                    <p>下载<a href="#" style="color:#f31dd7">HTML文档</a>和<a href="#" style="color:#f31dd7">CSS文件</a>。</p>
                 </div>
                 <div class="right_down">
-
+                    <img src="bg_2.png" style="float: right;margin:10px;height: 300px;">
+                    <h2>The Road to Enlightenment</h2>
+                    <p>不同浏览器随意定义标签，导致无法相互兼容的DOM结构，或者提供缺乏标准支持的CSS等陋习随处可见，如今当使用这些不兼容的标签和样式时，设计之路会一路坎坷。</p>
+                    <p>现在，我们必须清除以前为了兼容不同浏览器而使用的一些过时的小技巧。感谢W3C、WASP等标准组织，以及浏览器厂商和开发者们的不懈努力，我们终于能够进入Web设计的标准时代。</p>
+                    <p>CSS Zen Garden（样式表禅意花园）邀请您发挥自己的想象力，构思一个专业级的网页。让我们用慧眼来审视，充满理想和激情去学习CSS这个不朽的技术，最终使自己能够达到技术和艺术合二为一的最高境界</p>
                 </div>
             </div>
         </div>
