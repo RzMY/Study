@@ -1,5 +1,5 @@
-# n = input()
-# words = ['hello','good','','','yes','','ok','']
+n = input()
+words = ['hello','good','','','yes','','ok','']
 
 
 n = int(n)
@@ -14,8 +14,8 @@ else:
     print(words)
     
     
-# n = input()
-# a = [42,80,43,62,72,48,12,55,40,65,34,82,82,87,34,60,46,48,41,35]
+n = input()
+a = [42,80,43,62,72,48,12,55,40,65,34,82,82,87,34,60,46,48,41,35]
 
 
 n = int(n)
@@ -28,7 +28,7 @@ print(b + d + c)
 '''
 #判断一个数字能否同时被3、5、7整除
 '''
-# num = input()
+num = input()
 
 
 num = int(num)
@@ -40,7 +40,7 @@ else:
     
 '''
 '''
-# n = input()
+n = input()
 
 
 id = []
@@ -56,7 +56,7 @@ print(id[:int(n)])
 '''
 #12345 41235
 '''
-# num = input()
+num = input()
 
 
 a = str(num[0])
@@ -72,7 +72,7 @@ print(int(a + b + c + d + e))
 
 
 
-# num = input()
+num = input()
 
 n = int(num)
 num = [n]
@@ -84,3 +84,4 @@ while n != 1:
         n = n * 3 + 1
         num.append(n)
 print(num)
+
