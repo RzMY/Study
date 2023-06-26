@@ -201,3 +201,4 @@ print(numbers)  # 输出：[4, 2, 5, 1, 3]
 cards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 hand = random.sample(cards, 5)
 print(hand)  # 输出：['6', 'J', 'A', '9', 'K']
+
