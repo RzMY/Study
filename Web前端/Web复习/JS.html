@@ -1,0 +1,63 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>电费计算器</title>
+</head>
+<body>
+  <h1>电费计算器</h1>
+  <form>
+    <label>月用电量（千瓦时）：</label>
+    <input type="number" id="electricity" min="0" required>
+    <br>
+    <button type="button" onclick="calculate()">计算</button>
+  </form>
+  <div id="result"></div>
+  <script>
+    function calculate() {
+      var electricity = document.getElementById("electricity").value;
+      var price;
+      if (electricity <= 150) {
+        price = electricity * 0.4463;
+      } else if (electricity <= 400) {
+        price = 150 * 0.4463 + (electricity - 150) * 0.4663;
+      } else {
+        price = 150 * 0.4463 + 250 * 0.4663 + (electricity - 400) * 0.5663;
+      }
+      document.getElementById("result").innerHTML = "应交电费：" + price.toFixed(2) + "元";
+    }
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>电费计算器</title>
+  </head>
+  <body>
+    <h1>电费计算器</h1>
+    <form>
+      <label>月用电量（千瓦时）：</label>
+      <input type="number" id="electricity" min="0" required>
+      <br>
+      <button type="button" onclick="calculate()">计算</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      function calculate() {
+        var electricity = document.getElementById("electricity").value;
+        var price;
+        if (electricity <= 150) {
+          price = electricity * 0.4463;
+        } else if (electricity <= 400) {
+          price = 150 * 0.4463 + (electricity - 150) * 0.4663;
+        } else {
+          price = 150 * 0.4463 + 250 * 0.4663 + (electricity - 400) * 0.5663;
+        }
+        document.getElementById("result").innerHTML = "应交电费：" + price.toFixed(2) + "元";
+      }
+    </script>
+  </body>
+</html>
