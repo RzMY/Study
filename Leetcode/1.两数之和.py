@@ -13,15 +13,14 @@ class Solution(object):
         :rtype: List[int]
         """
         answer = []
-        sortrd_nums = sorted(nums)
-        for i in sortrd_nums:
-            for j in sortrd_nums:
+        for i,num1 in enumerate(nums):
+            for j,num2 in enumerate(nums):
                 if i == j:
                     continue
                 else:
-                    if i + j == target:
-                        answer.append(nums.index(i))
-                        answer.append(nums.index(j))
+                    if num1 + num2 == target:
+                        answer.append(i)
+                        answer.append(j)
                         break
                     else:
                         continue

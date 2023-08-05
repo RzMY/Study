@@ -116,12 +116,14 @@
 #         result.append(n)
 # print(result)
 
-str1 = "Hello,World!"
-result1 = str1.find("World")# 查找第一次出现的位置，不存在返回-1
-result2 = str1.rfind("o")# 查找最后一次出现的位置，不存在返回-1
-result3 = str1.index("World")# 查找第一次出现的位置，不存则异常
-result4 = str1.rindex("o")# 查找最后一次出现的位置，不存则异常
-print(result1) # 输出：7
-print(result2) # 输出：8
-print(result3) # 输出：7
-print(result4) # 输出：8
+# str1 = "Hello,World!"
+# result1 = str1.find("World")# 查找第一次出现的位置，不存在返回-1
+# result2 = str1.rfind("o")# 查找最后一次出现的位置，不存在返回-1
+# result3 = str1.index("World")# 查找第一次出现的位置，不存则异常
+# result4 = str1.rindex("o")# 查找最后一次出现的位置，不存则异常
+# print(result1) # 输出：7
+# print(result2) # 输出：8
+# print(result3) # 输出：7
+# print(result4) # 输出：8
+
+print (list(enumerate([4,5,8])))
