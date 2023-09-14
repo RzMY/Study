@@ -88,11 +88,107 @@
 #             print(ret)
 #     ret = re
 # print(ret)
-import sys
+# import sys
 
-s = "glwhcebdjbdroiurzfxxrbhzibilmcfasshhtyngwrsnbdpzgjphujzuawbebyhvxfhtoozcitaqibvvowyluvdbvoqikgojxcefzpdgahujuxpiclrrmalncdrotsgkpnfyujgvmhydrzdpiudkfchtklsaprptkzhwxsgafsvkahkbsighlyhjvbburdfjdfvjbaiivqxdqwivsjzztzkzygcsyxlvvwlckbsmvwjvrhvqfewjxgefeowfhrcturolvfgxilqdqvitbcebuooclugypurlsbdfquzsqngbscqwlrdpxeahricvtfqpnrfwbyjvahrtosovsbzhxtutyfjwjbpkfujeoueykmbcjtluuxvmffwgqjgrtsxtdimsescgahnudmsmyfijtfrcbkibbypenxnpiozzrnljazjgrftitldcueswqitrcvjzvlhionutppppzxoepvtzhkzjetpfqsuirdcyqfjsqhdewswldawhdyijhpqtrwgyfmmyhhkrafisicstqxokdmynnnqxaekzcgygsuzfiguujyxowqdfylesbzhnpznayzlinerzdqjrylyfzndgqokovabhzuskwozuxcsmyclvfwkbimhkdmjacesnvorrrvdwcgfewchbsyzrkktsjxgyybgwbvktvxyurufsrdufcunnfswqddukqrxyrueienhccpeuqbkbumlpxnudmwqdkzvsqsozkifpznwapxaxdclxjxuciyulsbxvwdoiolgxkhlrytiwrpvtjdwsssahupoyyjveedgqsthefdyxvjweaimadykubntfqcpbjyqbtnunuxzyytxfedrycsdhkfymaykeubowvkszzwmbbjezrphqildkmllskfawmcohdqalgccffxursvbyikjoglnillapcbcjuhaxukfhalcslemluvornmijbeawxzokgnlzugxkshrpojrwaasgfmjvkghpdyxt"
-for i in reversed(range(len(s) + 1)):
-    for j in range(len(s)):
-        if s[j:i+j][::-1] == s[j:i+j] and i + j <= len(s):
-            print(s[j:i+j])
-            sys.exit()
+# s = "glwhcebdjbdroiurzfxxrbhzibilmcfasshhtyngwrsnbdpzgjphujzuawbebyhvxfhtoozcitaqibvvowyluvdbvoqikgojxcefzpdgahujuxpiclrrmalncdrotsgkpnfyujgvmhydrzdpiudkfchtklsaprptkzhwxsgafsvkahkbsighlyhjvbburdfjdfvjbaiivqxdqwivsjzztzkzygcsyxlvvwlckbsmvwjvrhvqfewjxgefeowfhrcturolvfgxilqdqvitbcebuooclugypurlsbdfquzsqngbscqwlrdpxeahricvtfqpnrfwbyjvahrtosovsbzhxtutyfjwjbpkfujeoueykmbcjtluuxvmffwgqjgrtsxtdimsescgahnudmsmyfijtfrcbkibbypenxnpiozzrnljazjgrftitldcueswqitrcvjzvlhionutppppzxoepvtzhkzjetpfqsuirdcyqfjsqhdewswldawhdyijhpqtrwgyfmmyhhkrafisicstqxokdmynnnqxaekzcgygsuzfiguujyxowqdfylesbzhnpznayzlinerzdqjrylyfzndgqokovabhzuskwozuxcsmyclvfwkbimhkdmjacesnvorrrvdwcgfewchbsyzrkktsjxgyybgwbvktvxyurufsrdufcunnfswqddukqrxyrueienhccpeuqbkbumlpxnudmwqdkzvsqsozkifpznwapxaxdclxjxuciyulsbxvwdoiolgxkhlrytiwrpvtjdwsssahupoyyjveedgqsthefdyxvjweaimadykubntfqcpbjyqbtnunuxzyytxfedrycsdhkfymaykeubowvkszzwmbbjezrphqildkmllskfawmcohdqalgccffxursvbyikjoglnillapcbcjuhaxukfhalcslemluvornmijbeawxzokgnlzugxkshrpojrwaasgfmjvkghpdyxt"
+# for i in reversed(range(len(s) + 1)):
+#     for j in range(len(s)):
+#         if s[j:i+j][::-1] == s[j:i+j] and i + j <= len(s):
+#             print(s[j:i+j])
+#             sys.exit()
+
+
+# s = "a good   example"
+# while not (s[0].isalpha() and s[-1].isalpha()):
+#     s = s.strip()
+# ret = []
+# s_part = list(s.partition(" "))
+# while s_part[-1]:
+#     s_part = list(s.partition(" "))
+#     ret.append(s_part.pop(0))
+#     s_part.pop(0)
+#     s = "".join(s_part)
+#     if s != '':
+#         while not (s[0].isalpha() and s[-1].isalpha()):
+#             s = s.strip()
+# ret.reverse()
+# ret = " ".join(ret)
+# print(ret)
+
+# s = "  hello world  "
+# s_part = list(s.split(' '))
+# ret = []
+# for word in s_part:
+#     if word != '':
+#         ret.append(word)
+# ret.reverse()
+# ret = ' '.join(ret)  
+# print(ret)    
+
+# haystack = "hello"
+# needle = "ll"
+# for i in range(len(haystack)-len(needle)+1):
+#     active = True
+#     for j in range(len(needle)):
+#         if haystack[i+j] != needle[j]:
+#             active = False
+#     if active:
+#         print(i)
+# print(-1)
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        
+        # 暴力匹配
+        # for i in range(len(haystack)-len(needle)+1):
+        #     active = True
+        #     for j in range(len(needle)):
+        #         if haystack[i+j] != needle[j]:
+        #             active = False
+        #     if active:
+        #         return i
+        # return -1
+        
+        if haystack == needle:
+            return 0
+        if len(haystack)<len(needle):
+            return -1
+        next = []
+        if len(needle) == 1:
+            for i in range(len(haystack)-len(needle)+1):
+                active = True
+                for j in range(len(needle)):
+                    if haystack[i+j] != needle[j]:
+                        active = False
+                if active:
+                    return i
+            return -1
+        for i in reversed(range(1,len(needle))):
+            next = Solution().match(haystack,needle[:i])
+            if next != []:
+                break
+        for i in next:
+            active = True
+            for j in range(len(needle)):
+                if i + j >= len(haystack):
+                    active = False
+                    break
+                if haystack[i+j] != needle[j]:
+                    active = False
+            if active:
+                return i
+        return -1
+            
+    def match(self, haystack: str, needle: str) -> int:
+        next = []
+        for i in range(len(haystack)-len(needle)+1):
+            active = True
+            for j in range(len(needle)):
+                if haystack[i+j] != needle[j]:
+                    active = False
+            if active:
+                next.append(i)
+        return next
+    
+result = Solution().strStr("mississippi","sippia")
+print(result)
