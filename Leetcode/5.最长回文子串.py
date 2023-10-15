@@ -26,4 +26,3 @@ class Solution:
                 if s[j:i+j][::-1] == s[j:i+j] and i + j <= len(s):
                     return s[j:i+j]
 # @lc code=end
-

@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "homework_weeks4",
+      "request": "launch",
+      "mainClass": "homework_weeks4",
+      "projectName": "Study_9e24e826"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
