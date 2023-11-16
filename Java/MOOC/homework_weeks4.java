@@ -8,6 +8,7 @@ public class homework_weeks4{
         jack.loginOut();
         Student tom = new Student("tom", "101", "123456");
         tom.loginIn("101", "123456");
+        tom.setPwd("654321");
         tom.chooseClass("C++", "002", "周二", "jack");
         tom.loginOut();
     }
@@ -24,6 +25,7 @@ class Course{
     public String time;
     public String teacher;
     public String[] students;
+    public final String School = "四川农业大学";
     public void setClass(String name, String id, String time, String teacher, String[] students){
         this.name = name;
         this.id = id;
@@ -62,6 +64,14 @@ abstract class User implements loginable{
         System.out.println("你已成功退出！");
         return true;
     }
+
+    public String getPwd(){
+        return pwd;
+    }
+    public void setPwd(String pwd){
+        this.pwd = pwd;
+        System.out.println("密码修改成功！");
+    }
 }
 
 class Teacher extends User{
@@ -71,9 +81,6 @@ class Teacher extends User{
     public void setClass(String name, String id, String time, String teacher, String[] students){
         Course course = new Course();
         course.setClass(name, id, time, teacher, students);
-    }
-    {
-        identity = "教师";
     }
 }
 
