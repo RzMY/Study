@@ -85,14 +85,6 @@ int BTHeight(BTNode *b){
     }
 }
 
-int BTNodeCount(BTNode *b){
-    if (b == NULL){
-        return 0;
-    }else{
-        return BTNodeCount(b->lchild) + BTNodeCount(b->rchild) + 1;
-    }
-}
-
 void DispBTree(BTNode *b){
     if (b != NULL)
     {
@@ -108,28 +100,6 @@ void DispBTree(BTNode *b){
         }
     }
 }
-
-void LevelOrder(BTNode *b){
-    if(b == NULL) return;
-    BTNode* queue[MaxSize];
-    int front = 0, rear = 0;
-    queue[rear++] = b;
-    while(front != rear){
-        BTNode *p = queue[front++];
-        printf("%c ", p->data);
-        if (p->lchild != NULL){
-            queue[rear++] = p->lchild;
-        }
-        if (p->rchild != NULL){
-            queue[rear++] = p->rchild;
-        }
-    }
-}
-
-// void PreOrder(BTNode *b);
-
-// void InOrder(BTNode *b);
-// void PostOrder(BTNode *b);
 
 void DestroyBTree(BTNode *b){
     if (b != NULL){
@@ -150,7 +120,6 @@ int main(){
     printf("\n");
     printf("3.请输入要查找的节点：\n");
     char node;
-    while ((getchar()) != '\n');
     scanf("%c", &node);
     BTNode *FoundNode = FindNode(b, node);
     if(FoundNode != NULL)
@@ -158,10 +127,7 @@ int main(){
         printf("查找到%c的节点,该节点的左右孩子分别为%c %c\n", node, FoundNode->lchild->data, FoundNode->rchild->data);
     }
     printf("4.该二叉树深度为%d\n", BTHeight(b));
-    printf("5.操作结束，释放该二叉树\n");
-    printf("6.该树有%d个节点\n", BTNodeCount(b));
-    printf("7.层次遍历:\n");
-    LevelOrder(b);
+    printf("5.操作结束，释放该二叉树");
     DestroyBTree(b);
     return 0;
 }

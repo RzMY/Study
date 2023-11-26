@@ -13,8 +13,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/ratemy/Study/数据结构/排序",
-      "program": "/Users/ratemy/Study/数据结构/排序/build/Debug/outDebug"
+      "cwd": "/Users/ratemy/Study/数据结构/树",
+      "program": "/Users/ratemy/Study/数据结构/树/build/Debug/outDebug"
     }
   ]
 }
