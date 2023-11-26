@@ -1,10 +1,10 @@
 public class homework_weeks2{
     public static void main(String[] args){
-        if(3*3*3 + 4*4*4 + 5*5*5 == 6*6*6){
-            System.out.println("3^3+4^3+5^3 = 6^3 成立");
-        }else{
-            System.out.println("3^3+4^3+5^3 = 6^3 不成立");
-        }
+        // if(3*3*3 + 4*4*4 + 5*5*5 == 6*6*6){
+        //     System.out.println("3^3+4^3+5^3 = 6^3 成立");
+        // }else{
+        //     System.out.println("3^3+4^3+5^3 = 6^3 不成立");
+        // }
         int sum = 0;
         for(int i = 6; i <= 69; i++){
             sum = sum + i*i*i;    

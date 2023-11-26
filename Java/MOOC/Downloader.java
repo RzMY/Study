@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 class Downloader implements Runnable {
 	private final URL url;
 	private final String file;
-
+	
 	public Downloader(URL url, String file) {
 		this.url = url;
 		this.file = file;
