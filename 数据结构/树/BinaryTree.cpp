@@ -126,10 +126,46 @@ void LevelOrder(BTNode *b){
     }
 }
 
-// void PreOrder(BTNode *b);
+void PreOrder(BTNode *b){
+    if(b != NULL){
+        printf("%c ", b->data);
+        PreOrder(b->lchild);
+        PreOrder(b->rchild);
+    }
+}
 
-// void InOrder(BTNode *b);
-// void PostOrder(BTNode *b);
+void PreOrderNonRecursive(BTNode *b){
+    BTNode *St[MaxSize];
+    int top = -1;
+    St[++top] = b;
+    while(top != -1){
+        BTNode *p = St[top--];
+        printf("%c ", p->data);
+        if(p->rchild != NULL){
+            St[++top] = p->rchild;
+        }
+        if(p->lchild != NULL){
+            St[++top] = p->lchild;
+        }
+    }
+}
+
+
+void InOrder(BTNode *b){
+    if(b != NULL){
+        InOrder(b->lchild);
+        printf("%c ", b->data);
+        InOrder(b->rchild);
+    }
+}
+
+void PostOrder(BTNode *b){
+    if(b != NULL){
+        PostOrder(b->lchild);
+        PostOrder(b->rchild);
+        printf("%c ", b->data);
+    }
+}
 
 void DestroyBTree(BTNode *b){
     if (b != NULL){
