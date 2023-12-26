@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Test07",
+      "request": "launch",
+      "mainClass": "Java.实验.sj_07.src.Test07",
+      "projectName": "Study_1eb0cb9c"
+    },
+    {
+      "type": "java",
       "name": "homework_weeks4",
       "request": "launch",
       "mainClass": "homework_weeks4",
@@ -13,8 +20,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/ratemy/Study/数据结构/树",
-      "program": "/Users/ratemy/Study/数据结构/树/build/Debug/outDebug"
+      "cwd": "/Users/ratemy/Study/数据结构",
+      "program": "/Users/ratemy/Study/数据结构/build/Debug/outDebug"
     }
   ]
 }

@@ -1,7 +1,7 @@
-public class Employee {
+public class Employee2 {
     private String name, sex;
     int age, id;
-    Employee (int id, String name, String sex, int age){
+    Employee2 (int id, String name, String sex, int age){
         this.id = id;
         this.name = name;
         this.sex = sex;

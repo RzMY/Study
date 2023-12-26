@@ -149,6 +149,29 @@ void MergeSort(SqList *L){
     MSort(L->r, L->r, 1, L->length);
 }
 
+int partition(SqList *&L, int low, int high) {
+    int pivot = L->r[low];
+    while (low < high) {
+        while (low < high && L->r[high] >= pivot) {
+            --high;
+        }
+        Swap(L, low, high);
+        while (low < high && L->r[low] <= pivot) {
+            ++low;
+        }
+        Swap(L, low, high);
+    }
+    return low;
+}
+
+void QuickSort(SqList *&L, int low, int high) {
+    if (low < high) {
+        int pivot = partition(L, low, high);
+        QuickSort(L, low, pivot - 1);
+        QuickSort(L, pivot + 1, high);
+    }
+}
+
 int main(){
     SqList *L;
     int list[10] = {7,3,9,4,6,7,1,0,4,3};
@@ -158,7 +181,8 @@ int main(){
     // InsertSort(L);// 插入排序
     // ShellSort(L);// 希尔排序
     // HeapSort(L);// 堆排序
-    MergeSort(L);   
+    // MergeSort(L);// 归并排序
+    QuickSort(L, 1, 10);
     Disp(L);
     return 0;
 }
