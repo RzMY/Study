@@ -182,7 +182,7 @@ int main(){
     // ShellSort(L);// 希尔排序
     // HeapSort(L);// 堆排序
     // MergeSort(L);// 归并排序
-    QuickSort(L, 1, 10);
+    // QuickSort(L, 1, 10);// 快速排序
     Disp(L);
     return 0;
 }

@@ -22,7 +22,7 @@ def symmetric_closure(matrix):
 
 # 传递闭包函数
 def transitive_closure(matrix):
-    n = len(matrix)  # 获取矩阵的大小
+    n = len(matr  ix)  # 获取矩阵的大小
     transitive_matrix = matrix.copy()  # 复制原矩阵
     for k in range(n):
         for i in range(n):

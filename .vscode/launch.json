@@ -17,11 +17,13 @@
     },
     {
       "name": "C/C++ Runner: Debug Session",
-      "type": "lldb",
+      "type": "cppvsdbg",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/ratemy/Study/数据结构",
-      "program": "/Users/ratemy/Study/数据结构/build/Debug/outDebug"
+      "stopAtEntry": false,
+      "console": "externalTerminal",
+      "cwd": "h:/Study/Study/数据结构",
+      "program": "h:/Study/Study/数据结构/build/Debug/outDebug"
     }
   ]
 }
