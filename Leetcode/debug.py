@@ -136,59 +136,85 @@
 #         print(i)
 # print(-1)
 
-class Solution:
-    def strStr(self, haystack: str, needle: str) -> int:
+# class Solution:
+#     def strStr(self, haystack: str, needle: str) -> int:
         
-        # 暴力匹配
-        # for i in range(len(haystack)-len(needle)+1):
-        #     active = True
-        #     for j in range(len(needle)):
-        #         if haystack[i+j] != needle[j]:
-        #             active = False
-        #     if active:
-        #         return i
-        # return -1
+#         # 暴力匹配
+#         # for i in range(len(haystack)-len(needle)+1):
+#         #     active = True
+#         #     for j in range(len(needle)):
+#         #         if haystack[i+j] != needle[j]:
+#         #             active = False
+#         #     if active:
+#         #         return i
+#         # return -1
         
-        if haystack == needle:
-            return 0
-        if len(haystack)<len(needle):
-            return -1
-        next = []
-        if len(needle) == 1:
-            for i in range(len(haystack)-len(needle)+1):
-                active = True
-                for j in range(len(needle)):
-                    if haystack[i+j] != needle[j]:
-                        active = False
-                if active:
-                    return i
-            return -1
-        for i in reversed(range(1,len(needle))):
-            next = Solution().match(haystack,needle[:i])
-            if next != []:
-                break
-        for i in next:
-            active = True
-            for j in range(len(needle)):
-                if i + j >= len(haystack):
-                    active = False
-                    break
-                if haystack[i+j] != needle[j]:
-                    active = False
-            if active:
-                return i
-        return -1
+#         if haystack == needle:
+#             return 0
+#         if len(haystack)<len(needle):
+#             return -1
+#         next = []
+#         if len(needle) == 1:
+#             for i in range(len(haystack)-len(needle)+1):
+#                 active = True
+#                 for j in range(len(needle)):
+#                     if haystack[i+j] != needle[j]:
+#                         active = False
+#                 if active:
+#                     return i
+#             return -1
+#         for i in reversed(range(1,len(needle))):
+#             next = Solution().match(haystack,needle[:i])
+#             if next != []:
+#                 break
+#         for i in next:
+#             active = True
+#             for j in range(len(needle)):
+#                 if i + j >= len(haystack):
+#                     active = False
+#                     break
+#                 if haystack[i+j] != needle[j]:
+#                     active = False
+#             if active:
+#                 return i
+#         return -1
             
-    def match(self, haystack: str, needle: str) -> int:
-        next = []
-        for i in range(len(haystack)-len(needle)+1):
-            active = True
-            for j in range(len(needle)):
-                if haystack[i+j] != needle[j]:
-                    active = False
-            if active:
-                next.append(i)
-        return next
+#     def match(self, haystack: str, needle: str) -> int:
+#         next = []
+#         for i in range(len(haystack)-len(needle)+1):
+#             active = True
+#             for j in range(len(needle)):
+#                 if haystack[i+j] != needle[j]:
+#                     active = False
+#             if active:
+#                 next.append(i)
+#         return next
     
-result = Solution().strStr("mississippi","sippia")
-print(result)
+# result = Solution().strStr("mississippi","sippia")
+# print(result)
+# nums = [1,1,0,1,1,1]
+# fast = 0
+# size = len(nums)
+# res = []
+# count = 0
+# while(fast < size):
+#     if(nums[fast] == 1):
+#         count += 1
+#         fast += 1
+#     else:
+#         if count != 0:
+#             res.append(count)
+#             count = 0
+#         fast += 1
+# print(res)
+
+nums = [1,1,0,1,1,1]
+cur , max = 0 , 0
+for i in range(len(nums)):
+    if nums[i] == 1:
+        cur += 1
+    else:
+        if max < cur:
+            max = cur
+        cur = 0
+print(max(cur,max))
