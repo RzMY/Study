@@ -60,5 +60,7 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "java.debug.settings.onBuildFailureProceed": true,
-  "C_Cpp.errorSquiggles": "disabled"
+  "C_Cpp.errorSquiggles": "disabled",
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.autoImportCompletions": true
 }
