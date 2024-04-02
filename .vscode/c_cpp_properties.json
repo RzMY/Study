@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "name": "macos-clang-arm64",
+      "name": "windows-clang-x64",
       "includePath": [
         "${workspaceFolder}/**"
       ],
@@ -11,10 +11,25 @@
         "_UNICODE"
       ],
       "windowsSdkVersion": "10.0.19041.0",
-      "compilerPath": "/usr/bin/clang",
+      "compilerPath": "clang",
       "cStandard": "${default}",
       "cppStandard": "${default}",
-      "intelliSenseMode": "macos-clang-arm64"
+      "intelliSenseMode": "windows-clang-x64"
+    },
+    {
+      "name": "GCC",
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "compilerPath": "H:\\mingw64\\bin\\gcc.exe",
+      "cStandard": "c23",
+      "cppStandard": "c++23",
+      "intelliSenseMode": "windows-gcc-x64"
     }
   ],
   "version": 4
