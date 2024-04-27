@@ -22,8 +22,8 @@
       "args": [],
       "stopAtEntry": false,
       "console": "externalTerminal",
-      "cwd": "h:/Study/Study/C/C实验/实验5",
-      "program": "h:/Study/Study/C/C实验/实验5/build/Debug/outDebug"
+      "cwd": "h:/Study/Study/C/C实验/实验6",
+      "program": "h:/Study/Study/C/C实验/实验6/build/Debug/outDebug"
     },
     {
       "name": "C/C++: gcc.exe 生成和调试活动文件",
