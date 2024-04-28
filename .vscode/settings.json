@@ -1,6 +1,7 @@
 {
   "files.associations": {
-    "limits": "c"
+    "limits": "c",
+    "iostream": "cpp"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "clang",
