@@ -49,7 +49,7 @@ void SavingsAccount::withdraw(int date, double amount)
 
 double SavingsAccount::accumulate(int date)
 {
-    return accumulation + balance * (date - lastDate) * rate/365;
+    return accumulation + balance * (date - lastDate) * (rate/365);
 }
 
 void SavingsAccount::settle(int date)
