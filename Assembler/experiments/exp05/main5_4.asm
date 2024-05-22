@@ -12,11 +12,11 @@ START:
     MOV DS, AX
     MOV ES, AX
 
-    MOV CX, 20
+    MOV CX, 20 ;设置要复制的字节数
     LEA SI, CONAME+19
     LEA DI, PRLINE+19
-    STD
-    REP MOVSB
+    STD ;设置方向标志位，从高地址向低地址移动
+    REP MOVSB ;将DS:SI指向的字符串复制到ES:DI指向的字符串
 
     MOV AL,CONAME+2
     MOV AH, 0
@@ -24,7 +24,7 @@ START:
     MOV CX, 30
     LEA SI, STUDENT_NAME
     LEA DI, PRINT_LINE
-    CLD
+    CLD ;设置方向标志位，从低地址向高地址移动
     REP MOVSB
 
     MOV CX,9
