@@ -64,5 +64,22 @@
   "java.debug.settings.onBuildFailureProceed": true,
   "C_Cpp.errorSquiggles": "disabled",
   "python.analysis.typeCheckingMode": "basic",
-  "python.analysis.autoImportCompletions": true
+  "python.analysis.autoImportCompletions": true,
+  "cmake.configureOnOpen": true,
+  "editor.minimap.enabled": true,
+  "C_Cpp.autocomplete": "default",
+  "[cpp]": {
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  },
+  "[c]": {
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  }
 }
