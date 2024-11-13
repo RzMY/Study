@@ -1,0 +1,23 @@
+input L[1,n], V[1,n], D
+output V[n, D]
+
+for i = 1 to n
+    for j = 1 to D
+        if j < L[i]
+            V[i, j] = V[i-1, j]
+        else
+            V[i, j] = max(V[i-1, j], V[i-1, j-L[i]] + V[i])
+return V[n, D]
+
+input w[1,n], c[1,n], v[1,n], W, V
+output dp[n][W][V]
+
+for i = 1 to n
+    for j = 0 to W
+        for k = 0 to V
+            if j >= w[i] and k >= c[i]
+                dp[i][j][k] = max(dp[i-1][j][k], dp[i-1][j - w[i]][k - c[i]] + v[i])
+            else
+                dp[i][j][k] = dp[i-1][j][k]
+return dp[n][W][V]
+
