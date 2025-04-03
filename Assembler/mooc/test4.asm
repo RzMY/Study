@@ -1,0 +1,43 @@
+S_SEG SEGMENT  AT  1000H      ;定义堆栈段
+
+DW  200 DUP (?)      ;200*2=190H
+
+TOS LABEL WORD
+T_ADDR LABEL WORD
+
+S_SEG ENDS
+
+C_SEG SEGMENT    
+
+   ASSUME  CS: C_SEG, SS: S_SEG
+
+START: 
+    MOV AX, S_SEG
+
+    MOV SS, AX       ;SS=1000H
+
+    MOV SP, OFFSET  TOS  ;SP=190H
+
+    PUSH DS
+
+    MOV AX, 0
+
+    PUSH AX
+
+    PUSH T_ADDR
+
+    PUSH AX
+
+    PUSHF
+
+    POPF
+
+    POP  AX
+
+    POP T_ADDR
+
+    RET
+
+C_SEG ENDS    
+
+ END START 

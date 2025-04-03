@@ -1,0 +1,31 @@
+DATAS SEGMENT
+    (20100) = 12H
+    (20101) = 34H
+    (20102) = 56H
+    (20103) = 78H
+    (21200) = 2AH
+    (21201) = 4CH
+    (21202) = B7H
+    (21203) = 65H
+    (23204) = 88H
+DATAS ENDS
+
+STACKS SEGMENT
+STACKS ENDS
+
+CODES SEGMENT
+    (DS) = 2000H
+    (BX) = 0100H
+    (SI) = 0002H
+    (BP) = 0200H
+    (SS) = 2300H
+    MOV AX, 1200H; AX = 1200H
+    MOV AX, BX; AX = 0100H
+    MOV AX, [1200H]; AX = 12H
+    MOV AX, [BX]; AX = 12H
+    MOV AX, 1100[BX]; AX = 34H
+    MOV AX, [BX][SI]; AX = 56H
+    MOV AX, 1100[BX][SI]; AX = 78H
+    MOV AX, [BP + SI + 04]; AX = 2AH
+CODES ENDS
+END START

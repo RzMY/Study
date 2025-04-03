@@ -1,0 +1,16 @@
+CODES SEGMENT
+ASSUME CS:CODES
+START:
+    MOV AX,1
+    MOV CX,3
+    CALL S
+    MOV BX,AX
+    MOV AX,4C00H
+    INT 21H
+         
+S:
+    ADD AX,AX
+    LOOP S
+    RET
+CODES ENDS
+END START

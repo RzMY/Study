@@ -22,8 +22,8 @@
       "args": [],
       "stopAtEntry": false,
       "console": "externalTerminal",
-      "cwd": "h:/Study/Study/C/C实验/实验3",
-      "program": "h:/Study/Study/C/C实验/实验3/build/Debug/outDebug"
+      "cwd": "h:/Study/Study",
+      "program": "h:/Study/Study/build/Debug/outDebug"
     },
     {
       "name": "C/C++: gcc.exe 生成和调试活动文件",
@@ -36,7 +36,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
-      "miDebuggerPath": "H:\\mingw64\\bin\\gdb.exe",
+      "miDebuggerPath": "${default}",
       "setupCommands": [
         {
           "description": "为 gdb 启用整齐打印",

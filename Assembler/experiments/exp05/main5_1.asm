@@ -1,0 +1,20 @@
+DATA SEGMENT
+     STRING DB 'THE DATA IS FEB&03'
+     N DW $-STRING
+DATA ENDS
+CODE SEGMENT
+     ASSUME ES: DATA, CS: CODE ;将DATA段关联到ES寄存器
+START:
+     MOV  AX, DATA
+     MOV  ES, AX
+     MOV  AL, '&'
+     MOV  CX, N
+     LEA  DI, STRING
+     CLD
+     REPNE SCASB
+     DEC DI ;REPNE SCASB执行完后DI指向&下一个字符，所以要减1
+     MOV STRING[DI], ' '
+     MOV AH, 4CH
+     INT 21H
+CODE ENDS
+END START

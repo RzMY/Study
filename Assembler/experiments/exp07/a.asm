@@ -1,0 +1,105 @@
+DATAS SEGMENT
+    BUF DB 70H,58H,50H,91H,99H,62H,75H,82H,74H,60H
+    ORG 0020H
+    P1 DB 0
+    ORG 0030H
+    P2 DB 0
+    ORG 0040H
+    P3 DB 0
+      
+    ORG 0080H
+    COUNT DW 10 
+
+    ORG 0090H
+    P1_STR DB 'P1: $'
+    P2_STR DB 'P2: $'
+    P3_STR DB 'P3: $'
+    NEWLINE DB 0DH,0AH,'$'
+DATAS ENDS
+
+CSEG SEGMENT
+    ASSUME CS:CSEG,DS:DATAS
+MAIN PROC FAR    
+START:: 
+MOV AX,DATAS        
+MOV DS,AX
+
+CALL CNT              
+
+MOV AH,4CH
+INT 21H
+MAIN ENDP
+    
+CNT PROC NEAR
+    MOV CX,COUNT
+    MOV SI,OFFSET BUF
+LP1:
+    MOV AL,BUF[SI]
+    CMP AL,90H
+    JNB BTW90_100
+    CMP AL,60H
+    JNB BTW60_89
+    JL BLOW60
+    
+BTW90_100:
+    INC P1
+    INC SI
+    LOOPNZ LP1
+    JMP DISP
+    
+BTW60_89:
+    INC P2
+    INC SI
+    LOOPNZ LP1
+    JMP DISP
+
+BLOW60:
+    INC P3
+    INC SI
+    LOOPNZ LP1  
+
+DISP:
+    MOV AH,09H ;打印字符串，DS:DX=串地址 '$'结束字符串
+    LEA DX,P1_STR
+    INT 21H
+
+    MOV DL,P1
+    ADD DL,30H
+    MOV AH,02H
+    INT 21H
+
+    MOV AH,09H
+    LEA DX,NEWLINE
+    INT 21H
+
+    MOV AH,09H
+    LEA DX,P2_STR
+    INT 21H
+
+    MOV DL,P2
+    ADD DL,30H
+    MOV AH,02H
+    INT 21H
+
+    MOV AH,09H
+    LEA DX,NEWLINE
+    INT 21H
+
+    MOV AH,09H
+    LEA DX,P3_STR
+    INT 21H
+
+    MOV DL,P3
+    ADD DL,30H
+    MOV AH,02H
+    INT 21H
+
+    MOV AH,09H
+    LEA DX,NEWLINE
+    INT 21H
+
+RET 
+CNT ENDP  
+
+CSEG ENDS
+END START

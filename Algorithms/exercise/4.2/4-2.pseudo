@@ -1,0 +1,23 @@
+input L[1,n], D
+output count
+
+L.sort()
+for i = 1 to n
+    if total_length + L[i] ≤ D
+        total_length = total_length + L[i]
+        count = count + 1
+    else
+        break
+
+return count
+
+input d[1,n]
+output stations
+
+while i <= n
+    station = d[i] + 4
+    stations.append(station))
+    while i ≤ n and d[i] ≤ station + 4
+        i = i + 1
+return stations
+

@@ -208,13 +208,33 @@
 #         fast += 1
 # print(res)
 
-nums = [1,1,0,1,1,1]
-cur , max = 0 , 0
-for i in range(len(nums)):
-    if nums[i] == 1:
-        cur += 1
+# nums = [1,1,0,1,1,1]
+# cur , max = 0 , 0
+# for i in range(len(nums)):
+#     if nums[i] == 1:
+#         cur += 1
+#     else:
+#         if max < cur:
+#             max = cur
+#         cur = 0
+# print(max(cur,max))
+
+
+target = 7
+nums = [2,3,1,2,4,3]
+left = right = 0
+length = float('inf')
+total = 0
+while(left < len(nums) and right < len(nums) + 1):
+    if total >= target:
+        if right - left < length:
+            length = right - left
+        total -= nums[left]
+        left += 1
     else:
-        if max < cur:
-            max = cur
-        cur = 0
-print(max(cur,max))
+        if(right < len(nums)):
+            total += nums[right]
+            right += 1
+        else:
+            break
+print(length if length != float('inf') else 0)
