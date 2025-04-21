@@ -1,4 +1,5 @@
 # 分治法求解最大子段和
+# 作者: 计算机202205 邱宗森 202203792
 
 def MaxSubsequenceSum(array, left, right):
     if left == right:
