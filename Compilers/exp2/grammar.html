@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文法类型判断工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .file-input-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .file-input-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .textarea-container {
+            position: relative;
+        }
+
+        .grammar-input {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .grammar-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .examples-section {
+            margin-top: 20px;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .example-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .example-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .example-card.type-0 { border-left: 5px solid #ff6b6b; }
+        .example-card.type-1 { border-left: 5px solid #ffa726; }
+        .example-card.type-2 { border-left: 5px solid #42a5f5; }
+        .example-card.type-3 { border-left: 5px solid #66bb6a; }
+
+        .example-card h4 {
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        /* .example-card.type-0 h4 { color: #ff6b6b; }
+        .example-card.type-1 h4 { color: #ffa726; }
+        .example-card.type-2 h4 { color: #42a5f5; }
+        .example-card.type-3 h4 { color: #66bb6a; } */
+        .example-card.type-0 h4 { color: black; }
+        .example-card.type-1 h4 { color: black; }
+        .example-card.type-2 h4 { color: black; }
+        .example-card.type-3 h4 { color: black; }
+
+        .example-card .description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .example-card .grammar-preview {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .analyze-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .grammar-type {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .type-0 { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); }
+        .type-1 { background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%); }
+        .type-2 { background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); }
+        .type-3 { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); }
+
+        .analysis-steps {
+            margin-top: 20px;
+        }
+
+        .analysis-steps h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .step {
+            background: white;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .step h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .step-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .error {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #d32f2f;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .grammar-info {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .grammar-info h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+
+        .grammar-info table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .grammar-info th,
+        .grammar-info td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .grammar-info th {
+            background: #f5f5f5;
+            font-weight: 600;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>文法类型判断工具</h1>
+            <p>基于Chomsky层次结构判断文法类型</p>
+        </div>
+
+        <div class="content">
+            <div class="input-section">
+                <h2>输入文法</h2>
+                
+                <div class="file-input-container">
+                    <input type="file" id="fileInput" class="file-input" accept=".txt">
+                    <label for="fileInput" class="file-input-label">📁 选择文法文件</label>
+                </div>
+
+                <div class="textarea-container">
+                    <textarea id="grammarInput" class="grammar-input" placeholder="请输入文法规则，或选择文件上传，或点击下方示例快速体验...">G[S]:
+S->aA
+S->bS
+A->aS
+A->bA
+S->$</textarea>
+                </div>
+
+                <div class="examples-section">
+                    <h3>快速示例（点击加载）：</h3>
+                    <div class="examples-grid">
+                        <div class="example-card type-3" data-grammar="G[S]:
+S->aA
+S->bS
+A->aS
+A->bA
+S->$">
+                            <h4>3型文法 - 正则文法</h4>
+                            <div class="description">
+                                描述"偶数个a"的语言（字母表{a,b}），如ε, b, aa, bb, bab, aab等。
+                                S状态：已有偶数个a，A状态：已有奇数个a。
+                            </div>
+                            <div class="grammar-preview">S->aA | bS | ε
+A->aS | bA</div>
+                        </div>
+
+                        <div class="example-card type-2" data-grammar="G[S]:
+S->aSb
+S->$">
+                            <h4>2型文法 - 上下文无关文法</h4>
+                            <div class="description">
+                                描述aⁿbⁿ（n≥0）语言，即n个a后跟n个b，如ε, ab, aabb, aaabbb等。
+                                正则文法无法描述，因为需要"记忆"a的数量。
+                            </div>
+                            <div class="grammar-preview">S->aSb | ε</div>
+                        </div>
+
+                        <div class="example-card type-1" data-grammar="G[S]:
+S->aBC
+S->aSBC
+CB->BC
+aB->ab
+bB->bb
+bC->bc
+cC->cc">
+                            <h4>1型文法 - 上下文相关文法</h4>
+                            <div class="description">
+                                描述aⁿbⁿcⁿ（n≥1）语言，即n个a、n个b、n个c，如abc, aabbcc等。
+                                满足|β|≥|α|的非收缩条件，上下文无关文法无法描述。
+                            </div>
+                            <div class="grammar-preview">S->aBC | aSBC
+CB->BC, aB->ab, ...</div>
+                        </div>
+
+                        <div class="example-card type-0" data-grammar="G[S]:
+S->aBcS
+S->$
+Bc->cB
+aB->b">
+                            <h4>0型文法 - 无限制文法</h4>
+                            <div class="description">
+                                包含收缩规则的文法。aB->b是收缩规则（|左侧|=2 > |右侧|=1），
+                                使其成为0型文法，具有图灵机等价的计算能力。
+                            </div>
+                            <div class="grammar-preview">S->aBcS | ε
+Bc->cB, aB->b</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="analyzeBtn" class="analyze-btn">🔍 分析文法类型</button>
+            </div>
+
+            <div id="results" class="results hidden">
+                <div class="grammar-type">
+                    <div id="typeBadge" class="type-badge"></div>
+                </div>
+
+                <div class="grammar-info">
+                    <h3>文法信息</h3>
+                    <table>
+                        <tr>
+                            <th>开始符号</th>
+                            <td id="startSymbol"></td>
+                        </tr>
+                        <tr>
+                            <th>非终结符</th>
+                            <td id="nonTerminals"></td>
+                        </tr>
+                        <tr>
+                            <th>终结符</th>
+                            <td id="terminals"></td>
+                        </tr>
+                        <tr>
+                            <th>产生式数量</th>
+                            <td id="productionCount"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="analysis-steps">
+                    <h3>判断过程：</h3>
+                    <div id="analysisSteps"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class GrammarAnalyzer {
+            constructor() {
+                this.productions = [];
+                this.nonTerminals = new Set();
+                this.terminals = new Set();
+                this.startSymbol = '';
+            }
+
+            parseGrammar(input) {
+                const lines = input.trim().split('\n');
+                this.productions = [];
+                this.nonTerminals.clear();
+                this.terminals.clear();
+
+                // 解析开始符号
+                const firstLine = lines[0].trim();
+                const match = firstLine.match(/G\[(.+)\]:/);
+                if (match) {
+                    this.startSymbol = match[1];
+                    lines.shift(); // 移除第一行
+                } else {
+                    throw new Error('文法格式错误：缺少开始符号声明');
+                }
+
+                // 第一轮：收集所有左侧符号作为非终结符
+                for (let line of lines) {
+                    line = line.trim();
+                    if (!line) continue;
+
+                    const parts = line.split('->');
+                    if (parts.length !== 2) {
+                        throw new Error(`产生式格式错误: ${line}`);
+                    }
+
+                    const left = parts[0].trim();
+                    // 左侧的每个符号都是非终结符
+                    for (let char of left) {
+                        this.nonTerminals.add(char);
+                    }
+                }
+
+                // 第二轮：解析产生式并分析右侧符号
+                for (let line of lines) {
+                    line = line.trim();
+                    if (!line) continue;
+
+                    const parts = line.split('->');
+                    const left = parts[0].trim();
+                    const right = parts[1].trim();
+
+                    this.productions.push({ left, right });
+                    
+                    // 分析右侧符号
+                    this.analyzeSymbols(right);
+                }
+
+                // 确定终结符（不在非终结符集合中的符号）
+                this.determineTerminals();
+            }
+
+            analyzeSymbols(rightSide) {
+                // 处理空符号
+                if (rightSide === '$') return;
+
+                for (let char of rightSide) {
+                    if (char !== '$' && !this.nonTerminals.has(char)) {
+                        // 不在非终结符集合中的符号可能是终结符
+                        // 但这里只是标记，最终在determineTerminals中确定
+                    }
+                }
+            }
+
+            determineTerminals() {
+                for (let production of this.productions) {
+                    for (let char of production.right) {
+                        if (char !== '$' && !this.nonTerminals.has(char)) {
+                            this.terminals.add(char);
+                        }
+                    }
+                }
+            }
+
+            isType3() {
+                // 正则文法检查：需要区分右线性和左线性
+                let hasRightLinear = false;
+                let hasLeftLinear = false;
+                let hasOnlyTerminals = false;
+                let hasEmpty = false;
+
+                for (let prod of this.productions) {
+                    const { left, right } = prod;
+                    
+                    // 左侧必须是单个非终结符
+                    if (left.length !== 1 || !this.nonTerminals.has(left)) {
+                        return false;
+                    }
+
+                    // 分析右侧
+                    if (right === '$') {
+                        // A → ε
+                        hasEmpty = true;
+                    } else if (right.length === 1) {
+                        // A → a (单个终结符)
+                        if (this.terminals.has(right)) {
+                            hasOnlyTerminals = true;
+                        } else if (this.nonTerminals.has(right)) {
+                            // A → B (单个非终结符，在某些定义中也算正则文法)
+                            hasOnlyTerminals = true;
+                        } else {
+                            return false;
+                        }
+                    } else if (right.length === 2) {
+                        const first = right[0];
+                        const second = right[1];
+                        
+                        if (this.terminals.has(first) && this.nonTerminals.has(second)) {
+                            // A → aB (右线性)
+                            hasRightLinear = true;
+                        } else if (this.nonTerminals.has(first) && this.terminals.has(second)) {
+                            // A → Ba (左线性)
+                            hasLeftLinear = true;
+                        } else {
+                            return false;
+                        }
+                    } else if (right.length > 2) {
+                        // 长度超过2的产生式需要特殊检查
+                        if (!this.isValidRegularProduction(right)) {
+                            return false;
+                        }
+                        // 更新线性类型标记
+                        const hasNTAtStart = this.nonTerminals.has(right[0]);
+                        const hasNTAtEnd = this.nonTerminals.has(right[right.length - 1]);
+                        if (hasNTAtStart) hasLeftLinear = true;
+                        if (hasNTAtEnd) hasRightLinear = true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                // 不能同时有左线性和右线性
+                if (hasRightLinear && hasLeftLinear) {
+                    return false;
+                }
+
+                return true;
+            }
+
+            isValidRegularProduction(right) {
+                // 检查是否为有效的正则产生式
+                // 右线性：a1a2...anB 或 a1a2...an
+                // 左线性：Ba1a2...an
+                
+                let allTerminals = true;
+                let nonTerminalCount = 0;
+                let nonTerminalPosition = -1;
+
+                for (let i = 0; i < right.length; i++) {
+                    if (this.nonTerminals.has(right[i])) {
+                        nonTerminalCount++;
+                        nonTerminalPosition = i;
+                        allTerminals = false;
+                    } else if (!this.terminals.has(right[i])) {
+                        return false;
+                    }
+                }
+
+                // 如果全是终结符，那么是有效的
+                if (allTerminals) {
+                    return true;
+                }
+
+                // 如果有非终结符，只能有一个
+                if (nonTerminalCount !== 1) {
+                    return false;
+                }
+
+                // 非终结符必须在最开始（左线性）或最末尾（右线性）
+                return nonTerminalPosition === 0 || nonTerminalPosition === right.length - 1;
+            }
+
+            isType2() {
+                // 上下文无关文法：A → α
+                for (let prod of this.productions) {
+                    // 左侧必须是单个非终结符
+                    if (prod.left.length !== 1 || !this.nonTerminals.has(prod.left)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            isType1() {
+                // 上下文相关文法：|β| ≥ |α|，除了 S → ε
+                for (let prod of this.productions) {
+                    const { left, right } = prod;
+                    
+                    // 特殊情况：S → ε
+                    if (right === '$' && left === this.startSymbol) {
+                        // 检查 S 是否出现在其他产生式的右侧
+                        for (let otherProd of this.productions) {
+                            if (otherProd.right.includes(this.startSymbol)) {
+                                return false;
+                            }
+                        }
+                        continue;
+                    }
+
+                    // 一般情况：|β| ≥ |α|
+                    const leftLength = left.length;
+                    const rightLength = right === '$' ? 0 : right.length;
+                    
+                    if (rightLength < leftLength) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            analyzeType() {
+                const steps = [];
+                
+                // 检查3型文法（正则文法）
+                if (this.isType3()) {
+                    steps.push({
+                        title: '检查3型文法（正则文法）',
+                        content: '所有产生式都符合以下形式之一：\n' +
+                               '• A → a（终结符或终结符串）\n' +
+                               '• A → aB（右线性：终结符串后跟非终结符）\n' +
+                               '• A → Ba（左线性：非终结符后跟终结符串）\n' +
+                               '• A → ε（空符号）\n' +
+                               '注意：不能同时包含左线性和右线性产生式',
+                        result: '✅ 符合3型文法条件'
+                    });
+                    return { type: 3, steps };
+                }
+
+                // 检查2型文法（上下文无关文法）
+                if (this.isType2()) {
+                    steps.push({
+                        title: '检查2型文法（上下文无关文法）',
+                        content: '所有产生式左侧都是单个非终结符，形如：A → α',
+                        result: '✅ 符合2型文法条件'
+                    });
+                    return { type: 2, steps };
+                }
+
+                // 检查1型文法（上下文相关文法）
+                if (this.isType1()) {
+                    steps.push({
+                        title: '检查1型文法（上下文相关文法）',
+                        content: '对于所有产生式 α → β，都有 |β| ≥ |α|（除了 S → ε 且 S 不出现在右侧）',
+                        result: '✅ 符合1型文法条件'
+                    });
+                    return { type: 1, steps };
+                }
+
+                // 默认为0型文法
+                steps.push({
+                    title: '检查0型文法（无限制文法）',
+                    content: '不符合1型、2型、3型文法的条件，归类为无限制文法',
+                    result: '✅ 符合0型文法条件'
+                });
+                return { type: 0, steps };
+            }
+
+            getDetailedSteps() {
+                const result = this.analyzeType();
+                const detailedSteps = [];
+
+                // 添加产生式分析
+                detailedSteps.push({
+                    title: '产生式分析',
+                    content: `共有 ${this.productions.length} 个产生式：\n` +
+                           this.productions.map(p => `${p.left} → ${p.right === '$' ? 'ε' : p.right}`).join('\n')
+                });
+
+                // 添加符号集合分析
+                detailedSteps.push({
+                    title: '符号集合分析',
+                    content: `非终结符：{${Array.from(this.nonTerminals).join(', ')}}\n` +
+                           `终结符：{${Array.from(this.terminals).join(', ')}}\n` +
+                           `开始符号：${this.startSymbol}`
+                });
+
+                // 添加类型检查步骤
+                detailedSteps.push(...this.getTypeCheckSteps(result.type));
+
+                return { type: result.type, steps: detailedSteps };
+            }
+
+            getTypeCheckSteps(finalType) {
+                const steps = [];
+
+                // 3型检查
+                steps.push({
+                    title: '3型文法检查（正则文法）',
+                    content: this.getType3CheckDetails(),
+                    result: finalType === 3 ? '✅ 通过' : '❌ 不符合'
+                });
+
+                if (finalType !== 3) {
+                    // 2型检查
+                    steps.push({
+                        title: '2型文法检查（上下文无关文法）',
+                        content: this.getType2CheckDetails(),
+                        result: finalType === 2 ? '✅ 通过' : '❌ 不符合'
+                    });
+
+                    if (finalType !== 2) {
+                        // 1型检查
+                        steps.push({
+                            title: '1型文法检查（上下文相关文法）',
+                            content: this.getType1CheckDetails(),
+                            result: finalType === 1 ? '✅ 通过' : '❌ 不符合'
+                        });
+                    }
+                }
+
+                return steps;
+            }
+
+            getType3CheckDetails() {
+                let details = '检查是否所有产生式都符合正则文法形式：\n';
+                let hasRightLinear = false;
+                let hasLeftLinear = false;
+
+                for (let prod of this.productions) {
+                    const { left, right } = prod;
+                    const displayRight = right === '$' ? 'ε' : right;
+                    
+                    if (left.length === 1 && this.nonTerminals.has(left)) {
+                        if (right === '$') {
+                            details += `✅ ${left} → ${displayRight} (空产生式)\n`;
+                        } else if (right.length === 1) {
+                            if (this.terminals.has(right) || this.nonTerminals.has(right)) {
+                                details += `✅ ${left} → ${displayRight} (单个符号)\n`;
+                            } else {
+                                details += `❌ ${left} → ${displayRight} (未知符号)\n`;
+                            }
+                        } else if (right.length === 2) {
+                            const first = right[0];
+                            const second = right[1];
+                            
+                            if (this.terminals.has(first) && this.nonTerminals.has(second)) {
+                                details += `✅ ${left} → ${displayRight} (右线性)\n`;
+                                hasRightLinear = true;
+                            } else if (this.nonTerminals.has(first) && this.terminals.has(second)) {
+                                details += `✅ ${left} → ${displayRight} (左线性)\n`;
+                                hasLeftLinear = true;
+                            } else {
+                                details += `❌ ${left} → ${displayRight} (不符合正则文法)\n`;
+                            }
+                        } else {
+                            // 检查长产生式
+                            if (this.isValidRegularProduction(right)) {
+                                const hasNTAtStart = this.nonTerminals.has(right[0]);
+                                const hasNTAtEnd = this.nonTerminals.has(right[right.length - 1]);
+                                
+                                if (hasNTAtStart) {
+                                    details += `✅ ${left} → ${displayRight} (左线性长串)\n`;
+                                    hasLeftLinear = true;
+                                } else if (hasNTAtEnd) {
+                                    details += `✅ ${left} → ${displayRight} (右线性长串)\n`;
+                                    hasRightLinear = true;
+                                } else {
+                                    details += `✅ ${left} → ${displayRight} (纯终结符串)\n`;
+                                }
+                            } else {
+                                details += `❌ ${left} → ${displayRight} (不符合正则文法)\n`;
+                            }
+                        }
+                    } else {
+                        details += `❌ ${left} → ${displayRight} (左侧不是单个非终结符)\n`;
+                    }
+                }
+
+                if (hasRightLinear && hasLeftLinear) {
+                    details += '\n❌ 文法同时包含左线性和右线性产生式，不符合正则文法要求\n';
+                }
+
+                return details;
+            }
+
+            getType2CheckDetails() {
+                let details = '检查是否所有产生式左侧都是单个非终结符：\n';
+                for (let prod of this.productions) {
+                    const { left, right } = prod;
+                    const displayRight = right === '$' ? 'ε' : right;
+                    
+                    if (left.length === 1 && this.nonTerminals.has(left)) {
+                        details += `✅ ${left} → ${displayRight}\n`;
+                    } else {
+                        details += `❌ ${left} → ${displayRight} (左侧不是单个非终结符)\n`;
+                    }
+                }
+                return details;
+            }
+
+            getType1CheckDetails() {
+                let details = '检查是否满足长度非递减条件 |β| ≥ |α|：\n';
+                for (let prod of this.productions) {
+                    const { left, right } = prod;
+                    const displayRight = right === '$' ? 'ε' : right;
+                    const leftLen = left.length;
+                    const rightLen = right === '$' ? 0 : right.length;
+                    
+                    if (right === '$' && left === this.startSymbol) {
+                        details += `✅ ${left} → ${displayRight} (特殊情况：开始符号到空)\n`;
+                    } else if (rightLen >= leftLen) {
+                        details += `✅ ${left} → ${displayRight} (|${rightLen}| ≥ |${leftLen}|)\n`;
+                    } else {
+                        details += `❌ ${left} → ${displayRight} (|${rightLen}| < |${leftLen}|)\n`;
+                    }
+                }
+                return details;
+            }
+        }
+
+        // DOM 操作
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const grammarInput = document.getElementById('grammarInput');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const results = document.getElementById('results');
+            const exampleCards = document.querySelectorAll('.example-card');
+
+            fileInput.addEventListener('change', handleFileSelect);
+            analyzeBtn.addEventListener('click', analyzeGrammar);
+
+            // 添加示例卡片点击事件
+            exampleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const grammar = this.getAttribute('data-grammar');
+                    grammarInput.value = grammar;
+                    
+                    // 添加视觉反馈
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            function handleFileSelect(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        grammarInput.value = e.target.result;
+                    };
+                    reader.readAsText(file);
+                }
+            }
+
+            function analyzeGrammar() {
+                const input = grammarInput.value.trim();
+                if (!input) {
+                    alert('请输入文法或选择文件！');
+                    return;
+                }
+
+                try {
+                    const analyzer = new GrammarAnalyzer();
+                    analyzer.parseGrammar(input);
+                    const result = analyzer.getDetailedSteps();
+                    
+                    displayResults(result, analyzer);
+                } catch (error) {
+                    displayError(error.message);
+                }
+            }
+
+            function displayResults(result, analyzer) {
+                results.classList.remove('hidden');
+                
+                // 显示文法类型
+                const typeBadge = document.getElementById('typeBadge');
+                const typeNames = ['0型文法（无限制文法）', '1型文法（上下文相关文法）', '2型文法（上下文无关文法）', '3型文法（正则文法）'];
+                typeBadge.textContent = typeNames[result.type];
+                typeBadge.className = `type-badge type-${result.type}`;
+
+                // 显示文法信息
+                document.getElementById('startSymbol').textContent = analyzer.startSymbol;
+                document.getElementById('nonTerminals').textContent = Array.from(analyzer.nonTerminals).join(', ');
+                document.getElementById('terminals').textContent = Array.from(analyzer.terminals).join(', ');
+                document.getElementById('productionCount').textContent = analyzer.productions.length;
+
+                // 显示分析步骤
+                const stepsContainer = document.getElementById('analysisSteps');
+                stepsContainer.innerHTML = '';
+                
+                result.steps.forEach(step => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'step';
+                    stepDiv.innerHTML = `
+                        <h3>${step.title}</h3>
+                        <div class="step-content">
+                            <pre style="white-space: pre-wrap; font-family: inherit;">${step.content}</pre>
+                            ${step.result ? `<div style="margin-top: 10px; font-weight: bold;">${step.result}</div>` : ''}
+                        </div>
+                    `;
+                    stepsContainer.appendChild(stepDiv);
+                });
+
+                // 滚动到结果区域
+                results.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function displayError(message) {
+                results.innerHTML = `
+                    <div class="error">
+                        <strong>错误：</strong>${message}
+                    </div>
+                `;
+                results.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
